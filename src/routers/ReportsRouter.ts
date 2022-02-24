@@ -14,7 +14,7 @@ ReportsRouter.post("/report", async (req, res) => {
     try {
         const reportingUser = req.body?.user;
         const { url, vertical, description } = req.body?.data;
-
+        console.log(url, vertical, description, reportingUser)
         const dcServerUrl = process.env.DC_SERVER_URL || 'http://localhost:45610';
         if (!dcServerUrl) throw new Error("Missing dc server url");
 
