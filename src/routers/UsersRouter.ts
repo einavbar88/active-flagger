@@ -45,10 +45,10 @@ router.post("/signup", async (req: any, res: any) => {
     }
 });
 
-router.post("/logout", async (req: any, res: any) => {
-    console.log(req)
+router.post("/logout", auth, async (req: any, res: any) => {
+
     try {
-        const user = User.findByCookie(req.token)
+        const user = req.user
         user.tokens = user.tokens.filter((tokenObj: any) => tokenObj.token !== req.token);
         await user.save();
         res.status(200).send();
