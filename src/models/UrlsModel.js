@@ -17,6 +17,10 @@ const urlSchema = new mongoose.Schema({
     afJobId: {
         type: String,
         required: true
+    },
+    vertical: {
+        type: String,
+        required: true
     }
 }, {
     timestamps: true
