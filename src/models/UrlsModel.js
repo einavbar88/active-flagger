@@ -21,6 +21,9 @@ const urlSchema = new mongoose.Schema({
     vertical: {
         type: String,
         required: true
+    },
+    description: {
+        type: String
     }
 }, {
     timestamps: true

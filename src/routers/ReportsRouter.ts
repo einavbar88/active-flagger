@@ -13,7 +13,7 @@ ReportsRouter.post("/report", async (req, res) => {
     
     try {
         const reportingUser = req.body?.user;
-        const { url, vertical } = req.body?.data;
+        const { url, vertical, description } = req.body?.data;
 
         const dcServerUrl = process.env.DC_SERVER_URL || 'http://localhost:45610';
         if (!dcServerUrl) throw new Error("Missing dc server url");
@@ -44,7 +44,7 @@ ReportsRouter.post("/report", async (req, res) => {
 
         const afJobId = response.data.id;
 
-        const urlEntity = new Url({url, reportingUser, afJobId })
+        const urlEntity = new Url({url, reportingUser, afJobId, description })
 
         await urlEntity.save();   
 
