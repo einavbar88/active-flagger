@@ -46,6 +46,7 @@ router.post("/signup", async (req: any, res: any) => {
 });
 
 router.post("/logout", async (req: any, res: any) => {
+    console.log(req)
     try {
         const user = User.findByCookie(req.token)
         user.tokens = user.tokens.filter((tokenObj: any) => tokenObj.token !== req.token);
