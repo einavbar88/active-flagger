@@ -49,13 +49,13 @@ ReportsRouter.post("/report", async (req, res) => {
         const afJobId = response.data.id;
 
         const urlEntity = new Url({url, reportingUser, afJobId, description })
-
+        
         await urlEntity.save();   
 
         res.status(200).send(afJobId);
 
     } catch (err: any) {
-
+        console.log(err)
         res.status(400).send(err.message);
     }
 });
