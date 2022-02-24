@@ -1,5 +1,7 @@
 import express from "express";
 import axios from "axios";
+import Url from "../models/UrlsModel";
+
 
 const ReportsRouter = express.Router();
 
@@ -8,11 +10,10 @@ ReportsRouter.get("/", async (req, res) => {
 });
 
 ReportsRouter.post("/report", async (req, res) => {
-
+    
     try {
+        const reportingUser = req.body?.user;
         const { url, vertical } = req.body?.data;
-
-        console.log(url, vertical);
 
         const dcServerUrl = process.env.DC_SERVER_URL || 'http://localhost:45610';
         if (!dcServerUrl) throw new Error("Missing dc server url");
@@ -41,9 +42,13 @@ ReportsRouter.post("/report", async (req, res) => {
             }
         );
 
-        const id = response.data.id;
+        const afJobId = response.data.id;
 
-        res.status(200).send(id);
+        const urlEntity = new Url({url, reportingUser, afJobId })
+
+        await urlEntity.save();   
+
+        res.status(200).send(afJobId);
 
     } catch (err: any) {
 
