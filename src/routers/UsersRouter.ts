@@ -4,6 +4,15 @@ import auth from "../middleware/auth";
 
 const router = express.Router();
 
+router.get("/users", async (req: any, res: any) => {
+    try {
+        const users = await User.find({});
+        res.status(200).send(users);
+    } catch (err: any) {
+        res.status(400).send(err.message || err);
+    }
+});
+
 router.post("/login", async (req: any, res: any) => {
     try {
         const user = await User.findByCredentials(req.body.email, req.body.password);
