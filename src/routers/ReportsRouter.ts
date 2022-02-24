@@ -16,9 +16,9 @@ ReportsRouter.post("/report", async (req, res) => {
 
         const { url, vertical, description = "" } = req.body?.data;
 
-        console.log(url, vertical, description, reportingUser)
-
         const dcServerUrl = process.env.DC_SERVER_URL || 'http://localhost:45610';
+
+        console.log(url, vertical, dcServerUrl, reportingUser);
 
         const response = await axios.post(
             dcServerUrl,
@@ -43,6 +43,7 @@ ReportsRouter.post("/report", async (req, res) => {
                 },
             }
         );  
+        
         console.log(response.data.id);
 
         const afJobId = response.data.id;
