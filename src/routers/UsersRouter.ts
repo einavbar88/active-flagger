@@ -48,7 +48,7 @@ router.post("/logout", async (req: any, res: any) => {
 });
 
 router.put('/update-user-stats', auth, async (req: any, res: any) => {
-    const {_id, stats} = req
+    const {_id, stats} = req.body
     try {
         const user = await User.findByIdAndUpdate({_id}, { ...stats }, {
             new: true,
