@@ -48,7 +48,7 @@ ReportsRouter.post("/report", async (req, res) => {
 
         const afJobId = response.data.id;
 
-        const urlEntity = new Url({url, reportingUser, afJobId, description })
+        const urlEntity = new Url({url, reportingUser, afJobId, description, vertical })
         
         await urlEntity.save();   
 
